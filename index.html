@@ -58,13 +58,28 @@
       font-size: 24px;
       display: none;
     }
+    #continueButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #00f2fe;
+      color: #fff;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div id="gameArea">
     <div id="scoreBoard">Skor: 0 | Nyawa: 3</div>
-    <div id="dontol"><img src="dontol.jpg" alt="Dontol"></div>
-    <div id="gameOver">Game Over! <br><br> Refresh untuk main lagi.</div>
+    <div id="dontol"><img src="dontol-removebg-preview.png" alt="Dontol"></div>
+    <div id="gameOver">
+      Game Over! <br><br>
+      <a id="adLink" href="https://www.profitableratecpm.com/aqqsk9fh7s?key=7430356fe25a3ae38ec71e979467d517" target="_blank">Lihat Iklan</a><br><br>
+      <button id="continueButton">Lanjutkan Main</button>
+    </div>
+    <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
   </div>
 
   <script>
@@ -72,12 +87,16 @@
     const gameArea = document.getElementById('gameArea');
     const scoreBoard = document.getElementById('scoreBoard');
     const gameOver = document.getElementById('gameOver');
+    const clickSound = document.getElementById('clickSound');
+    const continueButton = document.getElementById('continueButton');
+    const adLink = document.getElementById('adLink');
 
     let score = 0;
     let lives = 3;
     let fallingSpeed = 2;
     let dontolY = -100;
     let dontolX = 100;
+    let gameLoop;
 
     function resetDontol() {
       dontolX = Math.random() * (window.innerWidth - 80);
@@ -93,8 +112,8 @@
       if (dontolY > window.innerHeight) {
         lives--;
         if (lives <= 0) {
-          gameOver.style.display = 'block';
           clearInterval(gameLoop);
+          gameOver.style.display = 'block';
           return;
         }
         resetDontol();
@@ -104,12 +123,21 @@
     }
 
     dontol.addEventListener('click', () => {
+      clickSound.play();
       score++;
       resetDontol();
     });
 
+    continueButton.addEventListener('click', () => {
+      lives = 3;
+      score = 0;
+      gameOver.style.display = 'none';
+      resetDontol();
+      gameLoop = setInterval(update, 20);
+    });
+
     resetDontol();
-    const gameLoop = setInterval(update, 20);
+    gameLoop = setInterval(update, 20);
   </script>
 </body>
 </html>
