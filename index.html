@@ -22,8 +22,8 @@
     }
     #dontol {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: 120px;
       background: transparent;
       display: flex;
       align-items: center;
@@ -58,7 +58,7 @@
       font-size: 24px;
       display: none;
     }
-    #continueButton {
+    #adButton {
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 18px;
@@ -76,8 +76,7 @@
     <div id="dontol"><img src="dontol-removebg-preview.png" alt="Dontol"></div>
     <div id="gameOver">
       Game Over! <br><br>
-      <a id="adLink" href="https://www.profitableratecpm.com/aqqsk9fh7s?key=7430356fe25a3ae38ec71e979467d517" target="_blank">Lihat Iklan</a><br><br>
-      <button id="continueButton">Lanjutkan Main</button>
+      <button id="adButton">Tonton Iklan</button>
     </div>
     <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
   </div>
@@ -88,8 +87,7 @@
     const scoreBoard = document.getElementById('scoreBoard');
     const gameOver = document.getElementById('gameOver');
     const clickSound = document.getElementById('clickSound');
-    const continueButton = document.getElementById('continueButton');
-    const adLink = document.getElementById('adLink');
+    const adButton = document.getElementById('adButton');
 
     let score = 0;
     let lives = 3;
@@ -99,8 +97,8 @@
     let gameLoop;
 
     function resetDontol() {
-      dontolX = Math.random() * (window.innerWidth - 80);
-      dontolY = -80;
+      dontolX = Math.random() * (window.innerWidth - 120);
+      dontolY = -120;
       fallingSpeed = 2 + Math.random() * 3;
       dontol.style.left = dontolX + 'px';
     }
@@ -128,12 +126,15 @@
       resetDontol();
     });
 
-    continueButton.addEventListener('click', () => {
-      lives = 3;
-      score = 0;
-      gameOver.style.display = 'none';
-      resetDontol();
-      gameLoop = setInterval(update, 20);
+    adButton.addEventListener('click', () => {
+      window.open("https://www.profitableratecpm.com/aqqsk9fh7s?key=7430356fe25a3ae38ec71e979467d517", "_blank");
+      setTimeout(() => {
+        lives = 3;
+        score = 0;
+        gameOver.style.display = 'none';
+        resetDontol();
+        gameLoop = setInterval(update, 20);
+      }, 1000);
     });
 
     resetDontol();
